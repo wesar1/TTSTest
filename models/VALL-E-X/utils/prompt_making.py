@@ -26,7 +26,7 @@ if torch.backends.mps.is_available():
     device = torch.device("mps")
 codec = AudioTokenizer(device)
 
-if not os.path.exists("./whisper/"): os.mkdir("./whisper/")
+# if not os.path.exists("./whisper/"): os.mkdir("./whisper/")
 whisper_model = None
 
 @torch.no_grad()
@@ -99,7 +99,8 @@ def make_transcript(name, wav, sr, transcript=None):
         logging.info("Transcript not given, using Whisper...")
         global whisper_model
         if whisper_model is None:
-            whisper_model = whisper.load_model("medium", download_root=os.path.join(os.getcwd(), "whisper"))
+            # path of whisper model
+            whisper_model = whisper.load_model("medium", download_root='/home/roo/dream/wutr/TTSTest/ckpts/VALL-E-X')
         whisper_model.to(device)
         torchaudio.save(f"./prompts/{name}.wav", wav, sr)
         lang, text = transcribe_one(whisper_model, f"./prompts/{name}.wav")

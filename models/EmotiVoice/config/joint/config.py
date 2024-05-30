@@ -41,9 +41,9 @@ class Config:
     pitch2id_path       = DATA_DIR + "text/pitch"
     energy2id_path      = DATA_DIR + "text/energy"
     speed2id_path       = DATA_DIR + "text/speed"
-    bert_path           = 'WangZeJun/simbert-base-chinese'
+    bert_path           = '/home/roo/dream/wutr/TTSTest/ckpts/emoti-simbert/simbert-base-chinese'
     token_list_path     = DATA_DIR + "text/tokenlist"
-    style_encoder_ckpt  = ROOT_DIR + "/outputs/style_encoder/ckpt/checkpoint_163431"
+    style_encoder_ckpt  = "/home/roo/dream/wutr/TTSTest/ckpts/emoti/style_encoder/ckpt/checkpoint_163431"
     tmp_dir             = ROOT_DIR + "/tmp"
     model_config_path   = ROOT_DIR + "/config/joint/config.yaml"
 

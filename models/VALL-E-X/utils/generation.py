@@ -29,12 +29,13 @@ from macros import *
 
 device = torch.device("cpu")
 if torch.cuda.is_available():
-    device = torch.device("cuda", 0)
+    device = torch.device("cuda", 2)
 if torch.backends.mps.is_available():
     device = torch.device("mps")
 url = 'https://huggingface.co/Plachta/VALL-E-X/resolve/main/vallex-checkpoint.pt'
 
-checkpoints_dir = "./checkpoints/" #####
+# path of checkpoints
+checkpoints_dir = "/home/roo/dream/wutr/TTSTest/ckpts/VALL-E-X" #####
 
 model_checkpoint_name = "vallex-checkpoint.pt"
 
@@ -51,18 +52,19 @@ def preload_models():
     global model, codec, vocos
     if not os.path.exists(checkpoints_dir): os.mkdir(checkpoints_dir)
     if not os.path.exists(os.path.join(checkpoints_dir, model_checkpoint_name)):
-        import wget
-        try:
-            logging.info(
-                "Downloading model from https://huggingface.co/Plachta/VALL-E-X/resolve/main/vallex-checkpoint.pt ...")
-            # download from https://huggingface.co/Plachta/VALL-E-X/resolve/main/vallex-checkpoint.pt to ./checkpoints/vallex-checkpoint.pt
-            wget.download("https://huggingface.co/Plachta/VALL-E-X/resolve/main/vallex-checkpoint.pt",
-                          out="./checkpoints/vallex-checkpoint.pt", bar=wget.bar_adaptive)
-        except Exception as e:
-            logging.info(e)
-            raise Exception(
-                "\n Model weights download failed, please go to 'https://huggingface.co/Plachta/VALL-E-X/resolve/main/vallex-checkpoint.pt'"
-                "\n manually download model weights and put it to {} .".format(os.getcwd() + "\checkpoints"))
+        pass
+        # import wget
+        # try:
+        #     logging.info(
+        #         "Downloading model from https://huggingface.co/Plachta/VALL-E-X/resolve/main/vallex-checkpoint.pt ...")
+        #     # download from https://huggingface.co/Plachta/VALL-E-X/resolve/main/vallex-checkpoint.pt to ./checkpoints/vallex-checkpoint.pt
+        #     wget.download("https://huggingface.co/Plachta/VALL-E-X/resolve/main/vallex-checkpoint.pt",
+        #                   out="./checkpoints/vallex-checkpoint.pt", bar=wget.bar_adaptive)
+        # except Exception as e:
+        #     logging.info(e)
+        #     raise Exception(
+        #         "\n Model weights download failed, please go to 'https://huggingface.co/Plachta/VALL-E-X/resolve/main/vallex-checkpoint.pt'"
+        #         "\n manually download model weights and put it to {} .".format(os.getcwd() + "\checkpoints"))
     # VALL-E
     model = VALLE(
         N_DIM,
@@ -108,6 +110,7 @@ def generate_audio(text, prompt=None, language='auto', accent='no-accent'):
             prompt_path = "./customs/" + prompt + ".npz"
         if not os.path.exists(prompt_path):
             raise ValueError(f"Cannot find prompt {prompt}")
+        # npz为numpy格式的压缩文件
         prompt_data = np.load(prompt_path)
         audio_prompts = prompt_data['audio_tokens']
         text_prompts = prompt_data['text_tokens']

@@ -40,7 +40,7 @@ def get_style_embedding(prompt, tokenizer, style_encoder):
 def main(args, config):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     root_path = os.path.join(config.output_directory, args.logdir)
-    ckpt_path = os.path.join(root_path,  "ckpt")
+    ckpt_path = '/home/roo/dream/wutr/TTSTest/ckpts/emoti/prompt_tts_open_source_joint/ckpt'
     files = os.listdir(ckpt_path)
     
     for file in files:
@@ -48,7 +48,7 @@ def main(args, config):
             if file != args.checkpoint:
                 continue
 
-        checkpoint_path = os.path.join(ckpt_path, file)
+        checkpoint_path = '/home/roo/dream/wutr/TTSTest/ckpts/emoti/prompt_tts_open_source_joint/ckpt/g_00140000'
 
         with open(config.model_config_path, 'r') as fin:
             conf = CONFIG.load_cfg(fin)
@@ -150,7 +150,7 @@ if __name__ == '__main__':
     ##################################################
     sys.path.append(os.path.dirname(os.path.abspath("__file__")) + "/" + args.config_folder)
 
-    from config import Config
+    from config.joint.config import Config
     config = Config()
     ##################################################
     main(args, config)

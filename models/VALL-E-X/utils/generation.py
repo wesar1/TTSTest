@@ -34,7 +34,7 @@ if torch.backends.mps.is_available():
     device = torch.device("mps")
 url = 'https://huggingface.co/Plachta/VALL-E-X/resolve/main/vallex-checkpoint.pt'
 
-checkpoints_dir = "./checkpoints/"
+checkpoints_dir = "./checkpoints/" #####
 
 model_checkpoint_name = "vallex-checkpoint.pt"
 

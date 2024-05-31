@@ -1,0 +1,1 @@
+SoVITS_weights/01_e4_s588.pth
